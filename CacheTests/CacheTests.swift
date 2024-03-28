@@ -8,11 +8,8 @@
 import XCTest
 @testable import Cache
 
-
-
 final class CacheTests: XCTestCase {
 
-    
     func test_add_twoElements_shouldSaveElements() {
        
         let sut = makeSUT()
@@ -27,7 +24,25 @@ final class CacheTests: XCTestCase {
         XCTAssertEqual(cache.data[1].data, test2.data)
     }
     
-//    func test_get_withNotEmptyCache_shouldReturnElement() {
+    
+    func test_add_oneElementAndThenChangeValue_shouldChangeValueByExistingKey() {
+       
+        let sut = makeSUT()
+        XCTAssertTrue(cache.data.isEmpty)
+       
+        sut.save(test)
+        XCTAssertEqual(cache.data.count, 1)
+        XCTAssertEqual(cache.data[0].data, test.data)
+        
+        sut.save(test3)
+        XCTAssertEqual(cache.data.count, 1)
+        XCTAssertEqual(cache.data[0].data, test3.data)
+    }
+    
+
+    
+    
+    //    func test_get_withNotEmptyCache_shouldReturnElement() {
 //        let sut = makeSUT()
 //       
 //        XCTAssertTrue(cache.elements.isEmpty)
@@ -61,11 +76,15 @@ final class CacheTests: XCTestCase {
         private(set) var data: [(key: Int, data: String)] = []
         
         func get(by key: Int) -> String? {
-            ""
+             data.first(where: { $0.key == key})?.data
         }
-        func update(for key: Int, new element: String) {
-            
+        
+        func update(old keyElement: Key, on newData: Element) {
+            if let index = data.firstIndex(where: { $0.key == keyElement }) {
+                data[index].data = newData
+            }
         }
+      
         func add(_ element: (key: Int, data: String)) {
             data.append(element)
         }
@@ -76,7 +95,11 @@ final class CacheTests: XCTestCase {
     }
     
     private var test2: (key: Int, data: String) {
-        (2, "Test2")
+         (2, "Test2")
+    }
+    
+    private var test3: (key: Int, data: String) {
+         (1, "Test3")
     }
     
     private let cache: CacheMock = CacheMock()

@@ -14,7 +14,7 @@ public protocol StorageProvider {
     associatedtype Key
 
     func get(by key: Key) -> Element?
-    func update(for key: Key, new element: Element)
+    func update(old keyElement: Key, on newData: Element)
     func add(_ element: (key: Key, data: Element))
 }
 
@@ -32,7 +32,19 @@ final class Storage<E: StorageProvider> {
     }
     
     func save(_ element: Data) {
-        provider.add(element)
+        if existData(by: element.key) {
+            provider.update(old: element.key, on: element.data)
+        } else {
+            provider.add(element)
+        }
+    }
+    
+    
+    private func existData(by key: Key) -> Bool {
+        if (provider.get(by: key) != nil) {
+            return true
+        }
+       return false
     }
     
 }
