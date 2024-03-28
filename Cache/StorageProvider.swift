@@ -8,41 +8,33 @@
 import Foundation
 
 
-public protocol Cache {
+public protocol StorageProvider {
     
-    associatedtype Element: Hashable
+    associatedtype Element
+    associatedtype Key
 
-    func get(_ element: Element) -> Element?
-    func update(_ element: Element)
-    func add(_ element: Element)
+    func get(by key: Key) -> Element?
+    func update(for key: Key, new element: Element)
+    func add(_ element: (key: Key, data: Element))
 }
 
-final class Storage<E: Cache> {
+final class Storage<E: StorageProvider> {
     
     typealias Element = E.Element
-  
+    typealias Key = E.Key
+    typealias Data = (key: Key, data: Element)
     
-    private let cache: E
+    private let provider: E
     
     
-    init(cache: E) {
-        self.cache = cache
-       
+    init(provider: E) {
+        self.provider = provider
     }
     
-    func save(_ element: Element) {
-        cache.add(element)
+    func save(_ element: Data) {
+        provider.add(element)
     }
     
-    func get(_ element: Element) -> Element? {
-        cache.get(element)
-    }
-//    private func isExist(_ element: Element) -> Bool {
-//        if let e = cache.get(element) {
-//            return e.id == element
-//        }
-//        return false
-//    }
 }
 
 
