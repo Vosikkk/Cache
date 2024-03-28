@@ -11,6 +11,7 @@
 		38B395DC2BB583CF00E21F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DB2BB583CF00E21F56 /* Assets.xcassets */; };
 		38B395DF2BB583CF00E21F56 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DE2BB583CF00E21F56 /* Base */; };
 		38B396042BB5856200E21F56 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396032BB5856200E21F56 /* Cache.swift */; };
+		38B396062BB5862000E21F56 /* CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396052BB5862000E21F56 /* CacheTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		38B395E52BB583CF00E21F56 /* CacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B396022BB5842A00E21F56 /* Cache.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cache.xctestplan; sourceTree = "<group>"; };
 		38B396032BB5856200E21F56 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		38B396052BB5862000E21F56 /* CacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		38B395E82BB583CF00E21F56 /* CacheTests */ = {
 			isa = PBXGroup;
 			children = (
+				38B396052BB5862000E21F56 /* CacheTests.swift */,
 			);
 			path = CacheTests;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 					};
 					38B395E42BB583CF00E21F56 = {
 						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
 						TestTargetID = 38B395D32BB583CE00E21F56;
 					};
 				};
@@ -199,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38B396062BB5862000E21F56 /* CacheTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +406,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XWYX5D2GFA;
@@ -410,6 +416,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Vosik.CacheTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cache.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cache";
 			};
@@ -420,6 +427,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XWYX5D2GFA;

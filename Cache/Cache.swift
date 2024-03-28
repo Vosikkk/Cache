@@ -10,10 +10,11 @@ import Foundation
 
 protocol Cache {
     
-    associatedtype Theme
-    associatedtype Game
+    associatedtype Element
     
-    func get(for theme: Theme) -> Game
-    func update(from old: Theme, to new: Theme)
+    func get(_ element: Element) -> Element
+    func update(from old: Element, to new: Element)
+    func add(_ element: Element)
 }
+
 
