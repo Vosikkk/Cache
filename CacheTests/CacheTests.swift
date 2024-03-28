@@ -16,10 +16,8 @@ final class CacheTests: XCTestCase {
     func test_add_twoElements_shouldSaveElements() {
        
         let sut = makeSUT()
-        let test: String = "Test"
-        let test2: String = "Test2"
         
-        XCTAssertEqual(cache.elements.count, 0)
+        XCTAssertTrue(cache.elements.isEmpty)
        
         sut.save(test)
         XCTAssertEqual(cache.elements[test], test)
@@ -31,18 +29,19 @@ final class CacheTests: XCTestCase {
         XCTAssertEqual(cache.elements.count, 2)
     }
     
-//    func test_get_withNotEmptyCache_shouldReturnElement() {
-//        let sut = CacheMock()
-//        let test: String = "Test"
-//        
-//        XCTAssertEqual(sut.elements.count, 0)
-//        
-//        sut.add(test)
-//        
-//        XCTAssertEqual(sut.get(test), test)
-//    }
-//    
-//    
+    func test_get_withNotEmptyCache_shouldReturnElement() {
+        let sut = makeSUT()
+       
+        XCTAssertTrue(cache.elements.isEmpty)
+        XCTAssertEqual(sut.get(test), nil)
+        
+        sut.save(test)
+        XCTAssertEqual(cache.elements.count, 1)
+        
+        XCTAssertEqual(sut.get(test), test)
+    }
+    
+    
     
     
     // MARK: - Helpers
@@ -53,7 +52,7 @@ final class CacheTests: XCTestCase {
         var callback: ([String: String]) -> Void = { _ in }
         
         func get(_ element: String) -> String? {
-            return elements[element]
+             elements[element]
         }
         
         func add(_ element: String) {
@@ -63,6 +62,14 @@ final class CacheTests: XCTestCase {
         func update(_ element: String) {
             
         }
+    }
+    
+    private var test: String {
+        "Test"
+    }
+    
+    private var test2: String {
+        "Test2"
     }
     
     private let cache: CacheMock = CacheMock()

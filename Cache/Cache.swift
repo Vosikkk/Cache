@@ -23,7 +23,7 @@ final class Storage<E: Cache> {
   
     
     private let cache: E
-   
+    
     
     init(cache: E) {
         self.cache = cache
@@ -34,6 +34,9 @@ final class Storage<E: Cache> {
         cache.add(element)
     }
     
+    func get(_ element: Element) -> Element? {
+        cache.get(element)
+    }
 //    private func isExist(_ element: Element) -> Bool {
 //        if let e = cache.get(element) {
 //            return e.id == element
