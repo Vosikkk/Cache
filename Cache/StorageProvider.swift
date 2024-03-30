@@ -11,18 +11,17 @@ import Foundation
 public protocol StorageProvider {
     
     associatedtype Element
-    associatedtype Key
+    associatedtype Key: Hashable
 
     func get(by key: Key) -> Element?
-    func update(old keyElement: Key, on newData: Element)
-    func add(_ element: (key: Key, data: Element))
+    func add(_ element: Element, for key: Key)
 }
 
 final class Storage<E: StorageProvider> {
     
     typealias Element = E.Element
     typealias Key = E.Key
-    typealias Data = (key: Key, data: Element)
+    typealias Data = [Key: Element]
     
     private let provider: E
     
@@ -32,21 +31,16 @@ final class Storage<E: StorageProvider> {
     }
     
     func save(_ element: Data) {
-        if existData(by: element.key) {
-            provider.update(old: element.key, on: element.data)
+        if let (key, data) = convert(element) {
+            provider.add(data, for: key)
         } else {
-            provider.add(element)
+            fatalError("Oy htere is no data")
         }
     }
     
-    
-    private func existData(by key: Key) -> Bool {
-        if (provider.get(by: key) != nil) {
-            return true
-        }
-       return false
+    private func convert(_ element: Data) -> (Key, Element)? {
+        element.map { ($0.key, $0.value) }.first
     }
-    
 }
 
 

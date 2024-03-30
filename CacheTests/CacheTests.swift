@@ -17,11 +17,11 @@ final class CacheTests: XCTestCase {
        
         sut.save(test)
         XCTAssertEqual(cache.data.count, 1)
-        XCTAssertEqual(cache.data[0].data, test.data)
+        XCTAssertEqual(cache.data[1], test.values.first)
         
         sut.save(test2)
         XCTAssertEqual(cache.data.count, 2)
-        XCTAssertEqual(cache.data[1].data, test2.data)
+        XCTAssertEqual(cache.data[2], test2.values.first)
     }
     
     
@@ -32,11 +32,11 @@ final class CacheTests: XCTestCase {
        
         sut.save(test)
         XCTAssertEqual(cache.data.count, 1)
-        XCTAssertEqual(cache.data[0].data, test.data)
+        XCTAssertEqual(cache.data[1], test.values.first)
         
         sut.save(test3)
         XCTAssertEqual(cache.data.count, 1)
-        XCTAssertEqual(cache.data[0].data, test3.data)
+        XCTAssertEqual(cache.data[1], test3.values.first)
     }
     
 
@@ -73,33 +73,28 @@ final class CacheTests: XCTestCase {
     
     private class CacheMock: StorageProvider {
         
-        private(set) var data: [(key: Int, data: String)] = []
+        private(set) var data: [Int: [String]] = [:]
         
-        func get(by key: Int) -> String? {
-             data.first(where: { $0.key == key})?.data
+        func get(by key: Int) -> [String]? {
+             data[key]
         }
-        
-        func update(old keyElement: Key, on newData: Element) {
-            if let index = data.firstIndex(where: { $0.key == keyElement }) {
-                data[index].data = newData
-            }
-        }
+    
       
-        func add(_ element: (key: Int, data: String)) {
-            data.append(element)
+        func add(_ element: [String], for key: Int) {
+             data[key] = element
         }
     }
     
-    private var test: (key: Int, data: String) {
-         (1, "Test")
+    private var test:  [Int: [String]] {
+        [1: ["Test1"]]
     }
     
-    private var test2: (key: Int, data: String) {
-         (2, "Test2")
+    private var test2: [Int: [String]] {
+        [2: ["Test2"]]
     }
     
-    private var test3: (key: Int, data: String) {
-         (1, "Test3")
+    private var test3: [Int: [String]] {
+        [1: ["Test3"]]
     }
     
     private let cache: CacheMock = CacheMock()
