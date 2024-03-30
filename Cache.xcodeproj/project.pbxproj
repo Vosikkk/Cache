@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B395D72BB583CE00E21F56 /* AppDelegate.swift */; };
 		38B395DC2BB583CF00E21F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DB2BB583CF00E21F56 /* Assets.xcassets */; };
-		38B395DF2BB583CF00E21F56 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DE2BB583CF00E21F56 /* Base */; };
 		38B396042BB5856200E21F56 /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396032BB5856200E21F56 /* StorageProvider.swift */; };
 		38B396062BB5862000E21F56 /* CacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396052BB5862000E21F56 /* CacheTests.swift */; };
 /* End PBXBuildFile section */
@@ -28,7 +27,6 @@
 		38B395D42BB583CE00E21F56 /* Cache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B395D72BB583CE00E21F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38B395DB2BB583CF00E21F56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		38B395DE2BB583CF00E21F56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38B395E02BB583CF00E21F56 /* Cache.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cache.entitlements; sourceTree = "<group>"; };
 		38B395E52BB583CF00E21F56 /* CacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B396022BB5842A00E21F56 /* Cache.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cache.xctestplan; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 			children = (
 				38B395D72BB583CE00E21F56 /* AppDelegate.swift */,
 				38B395DB2BB583CF00E21F56 /* Assets.xcassets */,
-				38B395DD2BB583CF00E21F56 /* Main.storyboard */,
 				38B395E02BB583CF00E21F56 /* Cache.entitlements */,
 				38B396032BB5856200E21F56 /* StorageProvider.swift */,
 			);
@@ -176,7 +173,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				38B395DC2BB583CF00E21F56 /* Assets.xcassets in Resources */,
-				38B395DF2BB583CF00E21F56 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,17 +212,6 @@
 			targetProxy = 38B395E62BB583CF00E21F56 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		38B395DD2BB583CF00E21F56 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				38B395DE2BB583CF00E21F56 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		38B395F72BB583CF00E21F56 /* Debug */ = {
@@ -360,7 +345,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -387,7 +371,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

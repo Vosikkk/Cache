@@ -40,35 +40,21 @@ final class CacheTests: XCTestCase {
     }
     
 
+    func test_get_withNotEmptyCache_shouldReturnElement() {
+        let sut = makeSUT()
+        
+        XCTAssertTrue(cache.data.isEmpty)
+        sut.save(test)
+        
+        XCTAssertEqual(sut.get(test.keys.first!), test.values.first)
+        
+        sut.save(test2)
+        XCTAssertEqual(sut.get(test2.keys.first!), test2.values.first)
+    }
+
     
-    
-    //    func test_get_withNotEmptyCache_shouldReturnElement() {
-//        let sut = makeSUT()
-//       
-//        XCTAssertTrue(cache.elements.isEmpty)
-//        XCTAssertEqual(sut.get(test), nil)
-//        
-//        sut.save(test)
-//        XCTAssertEqual(cache.elements.count, 1)
-//        
-//        XCTAssertEqual(sut.get(test), test)
-//    }
-//    
-//    
-//    func test_updatingElement_shouldUpdateValue() {
-//         let sut = makeSUT()
-//         
-//         sut.save(test)
-//         XCTAssertEqual(cache.elements.first?.value, test)
-//        
-//         
-//        
-//    }
-    
-    
-    
+        
     // MARK: - Helpers
-    
     
     
     private class CacheMock: StorageProvider {

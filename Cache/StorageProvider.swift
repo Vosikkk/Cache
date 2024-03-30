@@ -33,13 +33,15 @@ final class Storage<E: StorageProvider> {
     func save(_ element: Data) {
         if let (key, data) = convert(element) {
             provider.add(data, for: key)
-        } else {
-            fatalError("Oy htere is no data")
         }
     }
     
     private func convert(_ element: Data) -> (Key, Element)? {
         element.map { ($0.key, $0.value) }.first
+    }
+    
+    func get(_ key: Key) -> Element? {
+        provider.get(by: key)
     }
 }
 
