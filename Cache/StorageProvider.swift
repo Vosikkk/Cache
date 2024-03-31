@@ -35,19 +35,25 @@ final class Storage<E: StorageProvider> {
         self.activeProvider = provider
     }
     
-    func save(_ element: Data, addToAllProviders: Bool = false) {
+    func save(_ element: Data, to concrete: E? = nil, addToAllProviders: Bool = false) {
+        
+        let providerToUse: [E]
+        
         if addToAllProviders {
-            addElement(element, to: providers)
+            providerToUse = providers
+        } else if let concreteProvider = concrete {
+            providerToUse = [concreteProvider]
+        } else if let provider = providerToUseForSaving() {
+            providerToUse = [provider]
         } else {
-            if let providerToUse = providerToUseForSaving() {
-                addElement(element, to: [providerToUse])
-            } else {
-                print("No provider available to save the element.")
-            }
+            print("No provider available to save the element.")
+            return
         }
+        
+        add(element, to: providerToUse)
     }
     
-    private func addElement(_ element: Data, to providers: [E]) {
+    private func add(_ element: Data, to providers: [E]) {
         if let convertedElement = convert(element) {
             providers.forEach { $0.add(convertedElement.1, for: convertedElement.0) }
         } else {
@@ -74,7 +80,7 @@ final class Storage<E: StorageProvider> {
         }
     }
     
-    func get(_ key: Key) -> Element? {
+    func get(_ key: Key, from provider: E) -> Element? {
         providers.first?.get(by: key)
     }
 }
