@@ -10,7 +10,7 @@ import XCTest
 
 final class CacheTests: XCTestCase {
 
-    func test_add_twoElementsWhenSetOneProvider_shouldSaveElements() {
+    func test_save_twoElementsWhenSetOneProvider_shouldSaveElements() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -25,8 +25,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_add_twoElementsWhenTwoProviders_shouldSaveElementsToTwoProviders() {
-       
+    func test_save_twoElementsWhenTwoProviders_shouldSaveElementsToTwoProviders() {
        
         let cache1: CacheMock = CacheMock()
         let cache2: CacheMock = CacheMock()
@@ -49,7 +48,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_add_twoElementsWhenDefaultProvider_shouldSaveElements() {
+    func test_save_twoElementsWhenSetProvider_shouldSaveElements() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -64,7 +63,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_add_oneElementAndThenChangeValueWhenSetOneProvider_shouldChangeValueByExistingKey() {
+    func test_save_oneElementAndThenChangeValueWhenSetOneProvider_shouldChangeValueByExistingKey() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -79,7 +78,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_add_oneElementAndThenChangeValueWhenDefaultProvider_shouldChangeValueByExistingKey() {
+    func test_save_oneElementAndThenChangeValueWhenDefaultProvider_shouldChangeValueByExistingKey() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -94,17 +93,17 @@ final class CacheTests: XCTestCase {
     }
     
 
-//    func test_get_withNotEmptyCache_shouldReturnElement() {
-//        let sut = makeSUT()
-//        
-//        XCTAssertTrue(cache.data.isEmpty)
-//        
-//        sut.save(test)
-//        XCTAssertEqual(sut.get(test.keys.first!), cache.data[1])
-//        
-//        sut.save(test2)
-//        XCTAssertEqual(sut.get(test2.keys.first!), cache.data[2])
-//    }
+    func test_get_withNotEmptyCache_shouldReturnElement() {
+        let sut = makeSUT()
+        
+        XCTAssertTrue(cache.data.isEmpty)
+        
+        sut.save(test)
+        XCTAssertEqual(sut.get(test.keys.first!), cache.data[1])
+        
+        sut.save(test2)
+        XCTAssertEqual(sut.get(test2.keys.first!), cache.data[2])
+    }
 
     
         
@@ -138,7 +137,7 @@ final class CacheTests: XCTestCase {
     }
     
     private let cache: CacheMock = CacheMock()
-    private let cache2: CacheMock = CacheMock()
+   
     private func makeSUT() -> Storage<CacheMock> {
         let sut = Storage(cache)
         return sut

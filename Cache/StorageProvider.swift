@@ -74,9 +74,9 @@ final class Storage<E: StorageProvider> {
         }
     }
     
-//    func get(_ key: Key) -> Element? {
-//         
-//    }
+    func get(_ key: Key) -> Element? {
+        providers.first?.get(by: key)
+    }
 }
 
 
