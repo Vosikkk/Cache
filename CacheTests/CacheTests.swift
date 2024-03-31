@@ -102,7 +102,7 @@ final class CacheTests: XCTestCase {
     
     
     
-    func test_save_oneElementAndThenChangeValueWhenSetOneProvider_shouldChangeValueByExistingKey() {
+    func test_save_oneElementAndThenChangeValueWhenSetOneProvider_shouldChangeValueInSetProvider() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -132,6 +132,28 @@ final class CacheTests: XCTestCase {
     }
     
     
+    func test_save_elementsToThreeProvidersAllowToAllAndSetProvider_shouldSaveToAllProviders() {
+        let cache3 = CacheMock()
+        let sut = Storage(cache, cache2, cache3)
+        XCTAssertTrue(cache.data.isEmpty)
+        XCTAssertTrue(cache2.data.isEmpty)
+        XCTAssertTrue(cache3.data.isEmpty)
+        sut.set(active: cache)
+        sut.save(test, addToAllProviders: true)
+        
+        XCTAssertEqual(cache.data.count, 1)
+        XCTAssertEqual(cache2.data.count, 1)
+        XCTAssertEqual(cache3.data.count, 1)
+       
+        
+        XCTAssertEqual(cache.data[1], test.values.first)
+        XCTAssertEqual(cache2.data[1], test.values.first)
+        XCTAssertEqual(cache3.data[1], test.values.first)
+    }
+    
+    
+    
+    
     func test_save_createTwoProvidersThenSaveToConcrete_shouldSaveElementsOnlyForConcreteProvider() {
        
         let sut = makeSUT(moreThanOneCaches: true)
@@ -147,6 +169,16 @@ final class CacheTests: XCTestCase {
         XCTAssertEqual(cache2.data.count, 2)
     }
     
+    func test_save_doNotGiveUseaddToAllProvidersAndConcreteSimultaneously_shouldNotSavedAndShowMessage() {
+        let sut = makeSUT(moreThanOneCaches: true)
+        XCTAssertTrue(cache.data.isEmpty)
+        XCTAssertTrue(cache2.data.isEmpty)
+        
+        sut.save(test, to: cache, addToAllProviders: true)
+        
+        XCTAssertTrue(cache.data.isEmpty)
+        XCTAssertTrue(cache2.data.isEmpty)
+    }
     
     
     

@@ -36,7 +36,7 @@ final class Storage<E: StorageProvider> {
     }
     
     func save(_ element: Data, to concrete: E? = nil, addToAllProviders: Bool = false) {
-        if  concrete != nil, addToAllProviders {
+        if concrete != nil, addToAllProviders {
             print("Error: 'concrete' and 'addToAllProviders' parameters cannot be set simultaneously.")
             return
         }
@@ -81,10 +81,8 @@ final class Storage<E: StorageProvider> {
     private func providerToUseForSaving() -> E? {
         if let activeProvider = activeProvider {
             return activeProvider
-        } else if let firstProvider = providers.first {
-            return firstProvider
         } else {
-            return nil
+            return providers.first
         }
     }
     
