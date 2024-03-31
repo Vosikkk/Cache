@@ -25,6 +25,24 @@ final class CacheTests: XCTestCase {
     }
     
     
+    
+    func test_save_createTwoProvidersThenSetOne_shouldSaveElementsOnlyForSetProvider() {
+       
+        let sut = makeSUT(moreThanOneCaches: true)
+        XCTAssertTrue(cache.data.isEmpty)
+        sut.set(active: cache)
+        sut.save(test)
+        XCTAssertEqual(cache.data.count, 1)
+        XCTAssertTrue(cache2.data.isEmpty)
+        XCTAssertEqual(cache.data[1], test.values.first)
+        
+        sut.save(test2)
+        XCTAssertEqual(cache.data.count, 2)
+        XCTAssertTrue(cache2.data.isEmpty)
+        XCTAssertEqual(cache.data[2], test2.values.first)
+    }
+    
+    
     func test_save_elementToTwoProvidersAndAddOneMoreElementToConcreteProvider_shouldSaveNewElementOnlyForConcrete() {
        
        
@@ -68,7 +86,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_save_twoElementsWhenSetProvider_shouldSaveElements() {
+    func test_save_twoElementsWhenSetProvider_shouldSaveElementsToSetProvider() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -81,6 +99,7 @@ final class CacheTests: XCTestCase {
         XCTAssertEqual(cache.data.count, 2)
         XCTAssertEqual(cache.data[2], test2.values.first)
     }
+    
     
     
     func test_save_oneElementAndThenChangeValueWhenSetOneProvider_shouldChangeValueByExistingKey() {
@@ -98,7 +117,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_save_oneElementAndThenChangeValueWhenDefaultProvider_shouldChangeValueByExistingKey() {
+    func test_save_oneElementAndThenChangeValueWhenDefaultProvider_shouldChangeValueInDefaultProvider() {
        
         let sut = makeSUT()
         XCTAssertTrue(cache.data.isEmpty)
@@ -111,6 +130,25 @@ final class CacheTests: XCTestCase {
         XCTAssertEqual(cache.data.count, 1)
         XCTAssertEqual(cache.data[1], test3.values.first)
     }
+    
+    
+    func test_save_createTwoProvidersThenSaveToConcrete_shouldSaveElementsOnlyForConcreteProvider() {
+       
+        let sut = makeSUT(moreThanOneCaches: true)
+        XCTAssertTrue(cache.data.isEmpty)
+        XCTAssertTrue(cache2.data.isEmpty)
+        sut.save(test, addToAllProviders: true)
+        XCTAssertEqual(cache.data.count, 1)
+        XCTAssertEqual(cache2.data.count, 1)
+        
+        
+        sut.save(test2, to: cache2)
+        XCTAssertEqual(cache.data.count, 1)
+        XCTAssertEqual(cache2.data.count, 2)
+    }
+    
+    
+    
     
 
 //    func test_get_withNotEmptyCache_shouldReturnElement() {

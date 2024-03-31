@@ -36,21 +36,14 @@ final class Storage<E: StorageProvider> {
     }
     
     func save(_ element: Data, to concrete: E? = nil, addToAllProviders: Bool = false) {
-        
-        let providerToUse: [E]
-        
-        if addToAllProviders {
-            providerToUse = providers
-        } else if let concreteProvider = concrete {
-            providerToUse = [concreteProvider]
-        } else if let provider = providerToUseForSaving() {
-            providerToUse = [provider]
-        } else {
-            print("No provider available to save the element.")
+        if  concrete != nil, addToAllProviders {
+            print("Error: 'concrete' and 'addToAllProviders' parameters cannot be set simultaneously.")
             return
         }
-        
-        add(element, to: providerToUse)
+        if let providerToUse = whichAdd(concrete: concrete, addToAllProviders: addToAllProviders) {
+            add(element, to: providerToUse)
+        }
+        return
     }
     
     private func add(_ element: Data, to providers: [E]) {
@@ -69,6 +62,21 @@ final class Storage<E: StorageProvider> {
            return (firstElement.key, firstElement.value)
     }
     
+    
+    private func whichAdd(concrete: E?, addToAllProviders: Bool) -> [E]? {
+        let res: [E]
+        if addToAllProviders {
+            res = providers
+        } else if let concreteProvider = concrete {
+            res = [concreteProvider]
+        } else if let provider = providerToUseForSaving() {
+            res = [provider]
+        } else {
+            print("No provider available to save the element.")
+            return nil
+        }
+        return res
+    }
     
     private func providerToUseForSaving() -> E? {
         if let activeProvider = activeProvider {
