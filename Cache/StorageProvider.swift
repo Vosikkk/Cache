@@ -23,43 +23,60 @@ final class Storage<E: StorageProvider> {
     typealias Key = E.Key
     typealias Data = [Key: Element]
     
-    private let provider: E
+    private let providers: [E]
+    private var activeProvider: E?
+   
     
-    
-    init(provider: E) {
-        self.provider = provider
+    init(_ providers: E...) {
+        self.providers = providers
     }
     
-    func save(_ element: Data) {
-        if let (key, data) = convert(element) {
-            provider.add(data, for: key)
+    func set(active provider: E) {
+        self.activeProvider = provider
+    }
+    
+    func save(_ element: Data, addToAllProviders: Bool = false) {
+        if addToAllProviders {
+            addElement(element, to: providers)
+        } else {
+            if let providerToUse = providerToUseForSaving() {
+                addElement(element, to: [providerToUse])
+            } else {
+                print("No provider available to save the element.")
+            }
         }
     }
     
-    private func convert(_ element: Data) -> (Key, Element)? {
-        element.map { ($0.key, $0.value) }.first
+    private func addElement(_ element: Data, to providers: [E]) {
+        if let convertedElement = convert(element) {
+            providers.forEach { $0.add(convertedElement.1, for: convertedElement.0) }
+        } else {
+            print("Failed to convert element.")
+        }
     }
     
-    func get(_ key: Key) -> Element? {
-        provider.get(by: key)
+    
+    private func convert(_ element: Data) -> (Key, Element)? {
+        guard let firstElement = element.first else {
+               return nil
+           }
+           return (firstElement.key, firstElement.value)
     }
+    
+    
+    private func providerToUseForSaving() -> E? {
+        if let activeProvider = activeProvider {
+            return activeProvider
+        } else if let firstProvider = providers.first {
+            return firstProvider
+        } else {
+            return nil
+        }
+    }
+    
+//    func get(_ key: Key) -> Element? {
+//         
+//    }
 }
 
-
-//extension UserDefaults {
-//    
-//    func themes(forKey key: String) -> [Theme] {
-//        if let jsonData = data(forKey: key),
-//           let decodedThemes = try? JSONDecoder().decode([Theme].self, from: jsonData) {
-//            return decodedThemes
-//        } else {
-//            return []
-//        }
-//    }
-//    
-//    func set(_ themes: [Theme], forKey key: String) {
-//        let data = try? JSONEncoder().encode(themes)
-//        set(data, forKey: key)
-//    }
-//}
 
