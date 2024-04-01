@@ -132,7 +132,7 @@ final class CacheTests: XCTestCase {
     }
     
     
-    func test_save_elementsToThreeProvidersAllowToAllAndSetProvider_shouldSaveToAllProviders() {
+    func test_save_elementsToThreeProvidersAllowAllAndSetProvider_shouldSaveToAllProviders() {
         let cache3 = CacheMock()
         let sut = Storage(cache, cache2, cache3)
         XCTAssertTrue(cache.data.isEmpty)
@@ -183,17 +183,18 @@ final class CacheTests: XCTestCase {
     
     
 
-//    func test_get_withNotEmptyCache_shouldReturnElement() {
-//        let sut = makeSUT()
-//        
-//        XCTAssertTrue(cache.data.isEmpty)
-//        
-//        sut.save(test)
-//        XCTAssertEqual(sut.get(test.keys.first!), cache.data[1])
-//        
-//        sut.save(test2)
-//        XCTAssertEqual(sut.get(test2.keys.first!), cache.data[2])
-//    }
+    func test_get_withNotEmptyCache_shouldReturnElement() {
+        let sut = makeSUT(moreThanOneCaches: true)
+        
+        XCTAssertTrue(cache.data.isEmpty)
+        XCTAssertTrue(cache2.data.isEmpty)
+        
+        sut.save(test)
+        XCTAssertEqual(sut.get(test.keys.first!, from: cache), test.values.first)
+        
+        sut.save(test2, to: cache2)
+        XCTAssertEqual(sut.get(test2.keys.first!, from: cache2), test2.values.first)
+    }
 //    
 //    func test_get_withNotEmptyCache_shouldReturnElement() {
 //        let sut = makeSUT()
@@ -216,6 +217,7 @@ final class CacheTests: XCTestCase {
     
     
     private class CacheMock: StorageProvider {
+        var id: UUID = UUID()
         
         private(set) var data: [Int: [String]] = [:]
         

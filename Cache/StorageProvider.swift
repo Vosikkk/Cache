@@ -12,7 +12,8 @@ public protocol StorageProvider {
     
     associatedtype Element
     associatedtype Key: Hashable
-
+    
+    var id: UUID { get }
     func get(by key: Key) -> Element?
     func add(_ element: Element, for key: Key)
 }
@@ -45,6 +46,16 @@ final class Storage<E: StorageProvider> {
         }
         return
     }
+    
+    func get(_ key: Key, from provider: E) -> Element? {
+        if let index = index(of: provider) {
+            return providers[index].get(by: key)
+        } else {
+            return nil
+        }
+    }
+    
+    
     
     private func add(_ element: Data, to providers: [E]) {
         if let convertedElement = convert(element) {
@@ -86,9 +97,10 @@ final class Storage<E: StorageProvider> {
         }
     }
     
-    func get(_ key: Key, from provider: E) -> Element? {
-        providers.first?.get(by: key)
+    private func index(of provider: E) -> Int? {
+        providers.firstIndex { $0.id == provider.id }
     }
+    
 }
 
 
