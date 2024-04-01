@@ -195,24 +195,8 @@ final class CacheTests: XCTestCase {
         sut.save(test2, to: cache2)
         XCTAssertEqual(sut.get(test2.keys.first!, from: cache2), test2.values.first)
     }
-//    
-//    func test_get_withNotEmptyCache_shouldReturnElement() {
-//        let sut = makeSUT()
-//        
-//        XCTAssertTrue(cache.data.isEmpty)
-//        
-//        sut.save(test)
-//        XCTAssertEqual(sut.get(test.keys.first!), cache.data[1])
-//        
-//        sut.save(test2)
-//        XCTAssertEqual(sut.get(test2.keys.first!), cache.data[2])
-//    }
-    
-    
-    
 
-    
-        
+
     // MARK: - Helpers
     
     
