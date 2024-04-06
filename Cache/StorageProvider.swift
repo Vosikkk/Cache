@@ -65,13 +65,13 @@ final class ManagerProvider<E: Provider>: Provider {
     
     
     func add(_ element: Element, for key: Key) {
-         
+        providers.forEach { $0.add(element, for: key) }
     }
     
     
     
     
-    func save(to concrete: E, _ element: Data) {
+    func add(to concrete: E, _ element: Element, for key: Key) {
         
        
     }

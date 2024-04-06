@@ -27,18 +27,27 @@ final class ManagerTests: XCTestCase {
     }
     
     
-    func test_add_elementToProvider_shouldSaveElements() {
+    func test_add_elementToProviders_shouldSaveElements() {
        
-        let sut = makeSUT(with: provider1)
+        let sut = makeSUT(with: provider1, provider2)
         XCTAssertTrue(provider1.data.isEmpty)
+        XCTAssertTrue(provider2.data.isEmpty)
         
         sut.add(test.values.first!, for: 1)
+       
         XCTAssertEqual(provider1.data.count, 1)
         XCTAssertEqual(provider1.data[1], test.values.first)
+        XCTAssertEqual(provider2.data.count, 1)
+        XCTAssertEqual(provider2.data[1], test.values.first)
+        
         
         sut.add(test2.values.first!, for: 2)
         XCTAssertEqual(provider1.data.count, 2)
         XCTAssertEqual(provider1.data[2], test2.values.first)
+        
+        XCTAssertEqual(provider2.data.count, 2)
+        XCTAssertEqual(provider2.data[2], test2.values.first)
+        
     }
     
    
