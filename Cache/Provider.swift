@@ -30,19 +30,25 @@ public protocol StorageProvider {
 }
 
 
+public protocol Remover {
+    
+    associatedtype E
+    
+    func remove(_ element: E)
+}
 
 
 
-final class ManagerProvider<E: StorageProvider>: StorageProvider {
+
+final class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
    
     typealias Key = E.Key
     typealias Element = E.Element
-    typealias Data = [Key: Element]
     
     var id: UUID
+    private var providers: [E]
     
-    private let providers: [E]
-
+    
     var providersCount: Int {
         providers.count
     }
@@ -68,6 +74,14 @@ final class ManagerProvider<E: StorageProvider>: StorageProvider {
     
     func add(to concreteProvider: E, _ element: Element, forKey key: Key) {
         add(element, forKey: key, to: [concreteProvider])
+    }
+    
+    func remove(_ provider: E) {
+        providers.removeAll(where: { $0.id == provider.id })
+    }
+    
+    func remove(_ element: Element, from provider: E) {
+         
     }
     
     

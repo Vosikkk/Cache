@@ -96,6 +96,20 @@ final class ManagerTests: XCTestCase {
         XCTAssertEqual(sut.get(by: 2, fromConcrete: provider1), nil)
     }
     
+    
+    func test_removeProvider_shouldRemoveProviderFromArray() {
+        
+        let sut = makeSUT(with: provider1, provider2)
+        XCTAssertEqual(sut.providersCount, 2)
+        
+        sut.remove(provider1)
+        
+        XCTAssertEqual(sut.providersCount, 1)
+
+    }
+    
+    
+    
    
 
     
@@ -103,7 +117,9 @@ final class ManagerTests: XCTestCase {
     // MARK: - Helpers
     
     
-    private class ProviderMock: StorageProvider {
+    private class ProviderMock: StorageProvider, Remover {
+        
+        
         var id: UUID = UUID()
         
         private(set) var data: [Int: [String]] = [:]
@@ -114,6 +130,15 @@ final class ManagerTests: XCTestCase {
     
         func add(_ element: [String], forKey key: Int) {
              data[key] = element
+        }
+        
+        func remove(_ element: [String]) {
+            for (key, value) in data {
+                if value == element {
+                    data.removeValue(forKey: key)
+                    break
+                }
+            }
         }
     }
     
