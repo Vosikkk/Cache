@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Cache
+@testable import StorageProvider
 
 
 final class RemoverTests: XCTestCase {

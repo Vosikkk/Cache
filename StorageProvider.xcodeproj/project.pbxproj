@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		381D476E2BC187BE00B8E334 /* ManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D476D2BC187BE00B8E334 /* ManagerTests.swift */; };
-		389A75692BBB6FA900147A89 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A75682BBB6FA900147A89 /* Storage.swift */; };
 		389A756B2BBB700E00147A89 /* RemoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A756A2BBB700E00147A89 /* RemoverTests.swift */; };
 		38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B395D72BB583CE00E21F56 /* AppDelegate.swift */; };
 		38B395DC2BB583CF00E21F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DB2BB583CF00E21F56 /* Assets.xcassets */; };
-		38B396042BB5856200E21F56 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396032BB5856200E21F56 /* Provider.swift */; };
-		38B396062BB5862000E21F56 /* SorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396052BB5862000E21F56 /* SorageTests.swift */; };
+		38B396042BB5856200E21F56 /* ManagerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396032BB5856200E21F56 /* ManagerProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,16 +26,14 @@
 
 /* Begin PBXFileReference section */
 		381D476D2BC187BE00B8E334 /* ManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTests.swift; sourceTree = "<group>"; };
-		389A75682BBB6FA900147A89 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		389A756A2BBB700E00147A89 /* RemoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoverTests.swift; sourceTree = "<group>"; };
-		38B395D42BB583CE00E21F56 /* Cache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cache.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B395D42BB583CE00E21F56 /* StorageProvider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorageProvider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B395D72BB583CE00E21F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38B395DB2BB583CF00E21F56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		38B395E02BB583CF00E21F56 /* Cache.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cache.entitlements; sourceTree = "<group>"; };
-		38B395E52BB583CF00E21F56 /* CacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		38B396022BB5842A00E21F56 /* Cache.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cache.xctestplan; sourceTree = "<group>"; };
-		38B396032BB5856200E21F56 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		38B396052BB5862000E21F56 /* SorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorageTests.swift; sourceTree = "<group>"; };
+		38B395E02BB583CF00E21F56 /* StorageProvider.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StorageProvider.entitlements; sourceTree = "<group>"; };
+		38B395E52BB583CF00E21F56 /* StorageProviderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageProviderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B396022BB5842A00E21F56 /* StorageProvider.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = StorageProvider.xctestplan; sourceTree = "<group>"; };
+		38B396032BB5856200E21F56 /* ManagerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +57,9 @@
 		38B395CB2BB583CD00E21F56 = {
 			isa = PBXGroup;
 			children = (
-				38B396022BB5842A00E21F56 /* Cache.xctestplan */,
-				38B395D62BB583CE00E21F56 /* Cache */,
-				38B395E82BB583CF00E21F56 /* CacheTests */,
+				38B396022BB5842A00E21F56 /* StorageProvider.xctestplan */,
+				38B395D62BB583CE00E21F56 /* StorageProvider */,
+				38B395E82BB583CF00E21F56 /* StorageProviderTests */,
 				38B395D52BB583CE00E21F56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,40 +67,38 @@
 		38B395D52BB583CE00E21F56 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38B395D42BB583CE00E21F56 /* Cache.app */,
-				38B395E52BB583CF00E21F56 /* CacheTests.xctest */,
+				38B395D42BB583CE00E21F56 /* StorageProvider.app */,
+				38B395E52BB583CF00E21F56 /* StorageProviderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		38B395D62BB583CE00E21F56 /* Cache */ = {
+		38B395D62BB583CE00E21F56 /* StorageProvider */ = {
 			isa = PBXGroup;
 			children = (
 				38B395D72BB583CE00E21F56 /* AppDelegate.swift */,
 				38B395DB2BB583CF00E21F56 /* Assets.xcassets */,
-				38B395E02BB583CF00E21F56 /* Cache.entitlements */,
-				38B396032BB5856200E21F56 /* Provider.swift */,
-				389A75682BBB6FA900147A89 /* Storage.swift */,
+				38B395E02BB583CF00E21F56 /* StorageProvider.entitlements */,
+				38B396032BB5856200E21F56 /* ManagerProvider.swift */,
 			);
-			path = Cache;
+			path = StorageProvider;
 			sourceTree = "<group>";
 		};
-		38B395E82BB583CF00E21F56 /* CacheTests */ = {
+		38B395E82BB583CF00E21F56 /* StorageProviderTests */ = {
 			isa = PBXGroup;
 			children = (
-				38B396052BB5862000E21F56 /* SorageTests.swift */,
 				389A756A2BBB700E00147A89 /* RemoverTests.swift */,
 				381D476D2BC187BE00B8E334 /* ManagerTests.swift */,
 			);
-			path = CacheTests;
+			path = StorageProviderTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		38B395D32BB583CE00E21F56 /* Cache */ = {
+		38B395D32BB583CE00E21F56 /* StorageProvider */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38B395F92BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "Cache" */;
+			buildConfigurationList = 38B395F92BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "StorageProvider" */;
 			buildPhases = (
 				38B395D02BB583CE00E21F56 /* Sources */,
 				38B395D12BB583CE00E21F56 /* Frameworks */,
@@ -114,14 +108,14 @@
 			);
 			dependencies = (
 			);
-			name = Cache;
+			name = StorageProvider;
 			productName = Cache;
-			productReference = 38B395D42BB583CE00E21F56 /* Cache.app */;
+			productReference = 38B395D42BB583CE00E21F56 /* StorageProvider.app */;
 			productType = "com.apple.product-type.application";
 		};
-		38B395E42BB583CF00E21F56 /* CacheTests */ = {
+		38B395E42BB583CF00E21F56 /* StorageProviderTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38B395FC2BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "CacheTests" */;
+			buildConfigurationList = 38B395FC2BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "StorageProviderTests" */;
 			buildPhases = (
 				38B395E12BB583CF00E21F56 /* Sources */,
 				38B395E22BB583CF00E21F56 /* Frameworks */,
@@ -132,9 +126,9 @@
 			dependencies = (
 				38B395E72BB583CF00E21F56 /* PBXTargetDependency */,
 			);
-			name = CacheTests;
+			name = StorageProviderTests;
 			productName = CacheTests;
-			productReference = 38B395E52BB583CF00E21F56 /* CacheTests.xctest */;
+			productReference = 38B395E52BB583CF00E21F56 /* StorageProviderTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -157,7 +151,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 38B395CF2BB583CE00E21F56 /* Build configuration list for PBXProject "Cache" */;
+			buildConfigurationList = 38B395CF2BB583CE00E21F56 /* Build configuration list for PBXProject "StorageProvider" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -170,8 +164,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				38B395D32BB583CE00E21F56 /* Cache */,
-				38B395E42BB583CF00E21F56 /* CacheTests */,
+				38B395D32BB583CE00E21F56 /* StorageProvider */,
+				38B395E42BB583CF00E21F56 /* StorageProviderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,9 +193,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38B396042BB5856200E21F56 /* Provider.swift in Sources */,
+				38B396042BB5856200E21F56 /* ManagerProvider.swift in Sources */,
 				38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */,
-				389A75692BBB6FA900147A89 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +203,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				389A756B2BBB700E00147A89 /* RemoverTests.swift in Sources */,
-				38B396062BB5862000E21F56 /* SorageTests.swift in Sources */,
 				381D476E2BC187BE00B8E334 /* ManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +212,7 @@
 /* Begin PBXTargetDependency section */
 		38B395E72BB583CF00E21F56 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 38B395D32BB583CE00E21F56 /* Cache */;
+			target = 38B395D32BB583CE00E21F56 /* StorageProvider */;
 			targetProxy = 38B395E62BB583CF00E21F56 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -349,7 +341,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Cache/Cache.entitlements;
+				CODE_SIGN_ENTITLEMENTS = StorageProvider/StorageProvider.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -363,7 +356,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Vosik.Cache;
+				PRODUCT_BUNDLE_IDENTIFIER = Vosik.StorageProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -375,7 +368,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Cache/Cache.entitlements;
+				CODE_SIGN_ENTITLEMENTS = StorageProvider/StorageProvider.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -389,7 +383,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Vosik.Cache;
+				PRODUCT_BUNDLE_IDENTIFIER = Vosik.StorageProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -408,12 +402,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Vosik.CacheTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Vosik.StorageProviderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cache.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cache";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StorageProvider.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StorageProvider";
 			};
 			name = Debug;
 		};
@@ -429,18 +423,18 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Vosik.CacheTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Vosik.StorageProviderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cache.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Cache";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StorageProvider.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StorageProvider";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38B395CF2BB583CE00E21F56 /* Build configuration list for PBXProject "Cache" */ = {
+		38B395CF2BB583CE00E21F56 /* Build configuration list for PBXProject "StorageProvider" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38B395F72BB583CF00E21F56 /* Debug */,
@@ -449,7 +443,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38B395F92BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "Cache" */ = {
+		38B395F92BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "StorageProvider" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38B395FA2BB583CF00E21F56 /* Debug */,
@@ -458,7 +452,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38B395FC2BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "CacheTests" */ = {
+		38B395FC2BB583CF00E21F56 /* Build configuration list for PBXNativeTarget "StorageProviderTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38B395FD2BB583CF00E21F56 /* Debug */,

@@ -6,12 +6,11 @@
 //
 
 import XCTest
-@testable import Cache
+@testable import StorageProvider
 
 
 final class ManagerTests: XCTestCase {
 
-    
     
     func test_initProviders_providersCountEqualAsAddedProviders() {
         
@@ -33,20 +32,20 @@ final class ManagerTests: XCTestCase {
         XCTAssertTrue(provider1.data.isEmpty)
         XCTAssertTrue(provider2.data.isEmpty)
         
-        sut.add(test.values.first!, forKey: 1)
+        sut.add(test.value, forKey: test.key)
        
         XCTAssertEqual(provider1.data.count, 1)
-        XCTAssertEqual(provider1.data[1], test.values.first)
+        XCTAssertEqual(provider1.data[test.key], test.value)
         XCTAssertEqual(provider2.data.count, 1)
-        XCTAssertEqual(provider2.data[1], test.values.first)
+        XCTAssertEqual(provider2.data[test.key], test.value)
         
         
-        sut.add(test2.values.first!, forKey: 2)
+        sut.add(test2.value, forKey: test2.key)
         XCTAssertEqual(provider1.data.count, 2)
-        XCTAssertEqual(provider1.data[2], test2.values.first)
+        XCTAssertEqual(provider1.data[test2.key], test2.value)
         
         XCTAssertEqual(provider2.data.count, 2)
-        XCTAssertEqual(provider2.data[2], test2.values.first)
+        XCTAssertEqual(provider2.data[test2.key], test2.value)
         
     }
     
@@ -57,20 +56,20 @@ final class ManagerTests: XCTestCase {
         XCTAssertTrue(provider1.data.isEmpty)
         XCTAssertTrue(provider2.data.isEmpty)
         
-        sut.add(test.values.first!, forKey: 1)
+        sut.add(test.value, forKey: test.key)
        
         XCTAssertEqual(provider1.data.count, 1)
-        XCTAssertEqual(provider1.data[1], test.values.first)
+        XCTAssertEqual(provider1.data[test.key], test.value)
         XCTAssertEqual(provider2.data.count, 1)
-        XCTAssertEqual(provider2.data[1], test.values.first)
+        XCTAssertEqual(provider2.data[test.key], test.value)
         
         
-        sut.add(to: provider2, test2.values.first!, forKey: 2)
+        sut.add(to: provider2, test2.value, forKey: test2.key)
         XCTAssertEqual(provider1.data.count, 1)
-        XCTAssertEqual(provider1.data[2], nil)
+        XCTAssertEqual(provider1.data[test2.key], nil)
         
         XCTAssertEqual(provider2.data.count, 2)
-        XCTAssertEqual(provider2.data[2], test2.values.first)
+        XCTAssertEqual(provider2.data[test2.key], test2.value)
     }
     
     
@@ -78,22 +77,22 @@ final class ManagerTests: XCTestCase {
         
         let sut = makeSUT(with: provider1)
         
-        sut.add(test.values.first!, forKey: 1)
-        sut.add(test.values.first!, forKey: 2)
+        sut.add(test.value, forKey: test.key)
+        sut.add(test.value, forKey: test2.key)
         
-        XCTAssertEqual(sut.get(by: 1), test.values.first!)
-        XCTAssertEqual(sut.get(by: 2), test.values.first!)
+        XCTAssertEqual(sut.get(by: test.key), test.value)
+        XCTAssertEqual(sut.get(by: test2.key), test.value)
     }
     
     func test_getElementByKey_fromConreteProvider_shouldReturnElementFromConcreteProvider() {
         
         let sut = makeSUT(with: provider1, provider2)
         
-        sut.add(test.values.first!, forKey: 1)
-        sut.add(to: provider2, test.values.first!, forKey: 2)
+        sut.add(test.value, forKey: test.key)
+        sut.add(to: provider2, test.value, forKey: test2.key)
         
-        XCTAssertEqual(sut.get(by: 1), test.values.first!)
-        XCTAssertEqual(sut.get(by: 2, fromConcrete: provider1), nil)
+        XCTAssertEqual(sut.get(by: test.key), test.value)
+        XCTAssertEqual(sut.get(by: test2.key, fromConcrete: provider1), nil)
     }
     
     
@@ -105,10 +104,17 @@ final class ManagerTests: XCTestCase {
         XCTAssertEqual(sut.providersCount, 1)
     }
     
-    
-    
-   
-
+    func test_removeElementFromConcreteProvider_shouldRemmoveElementAndReturnIt() {
+        
+        let sut = makeSUT(with: provider1)
+        
+        sut.add(test.value, forKey: test.key)
+        
+        XCTAssertEqual(sut.remove(elementByKey: test.key, from: provider1), test.value)
+        
+        XCTAssertEqual(sut.get(by: test.key), nil)
+        
+    }
     
     
     // MARK: - Helpers
@@ -129,44 +135,42 @@ final class ManagerTests: XCTestCase {
              data[key] = element
         }
         
-        func remove(_ element: [String]) {
-            for (key, value) in data {
-                if value == element {
-                    data.removeValue(forKey: key)
-                    break
-                }
-            }
+        func remove(byKey key: Int) -> [String]? {
+            data.removeValue(forKey: key)
         }
     }
     
     
-    private var test: [Int: [String]] {
-        [1: ["Test1"]]
+    private var test: (key: Int, value: [String]) {
+        (1, ["Test"])
     }
     
-    private var test2: [Int: [String]] {
-        [2: ["Test2"]]
+    private var test2: (key: Int, value: [String]) {
+        (2, ["Test2"])
     }
     
-    private var test3: [Int: [String]] {
-        [1: ["Test3"]]
+    private var test3: (key: Int, value: [String]) {
+        (3, ["Test3"])
     }
     
     private let provider1: ProviderMock = ProviderMock()
     private let provider2: ProviderMock = ProviderMock()
     private let provider3: ProviderMock = ProviderMock()
    
+    
+    
     private func makeSUT(with providers: ProviderMock...) -> ManagerProvider<ProviderMock> {
-        
+        var sut: ManagerProvider<ProviderMock>
         switch providers.count {
         case 1:
-            return ManagerProvider(providers: providers[0])
+            sut = ManagerProvider(providers: providers[0])
         case 2:
-            return ManagerProvider(providers: providers[0], providers[1])
+            sut = ManagerProvider(providers: providers[0], providers[1])
         case 3:
-            return ManagerProvider(providers: providers[0], providers[1], providers[2])
+            sut = ManagerProvider(providers: providers[0], providers[1], providers[2])
         default:
-            return ManagerProvider(providers: provider1)
+            sut = ManagerProvider(providers: provider1)
         }
+        return sut
     }
 }

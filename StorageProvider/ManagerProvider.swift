@@ -1,22 +1,11 @@
 //
-//  Cache.swift
+//  ManagerProvider.swift
 //  Cache
 //
 //  Created by Саша Восколович on 28.03.2024.
 //
 
 import Foundation
-
-
-public protocol Provider {
-    
-    associatedtype Element
-    associatedtype Key: Hashable
-    
-    var id: UUID { get }
-    func get(by key: Key) -> Element?
-    func add(_ element: Element, for key: Key)
-}
 
 
 public protocol StorageProvider {
@@ -32,13 +21,12 @@ public protocol StorageProvider {
 
 public protocol Remover {
     
-    associatedtype E
+    associatedtype Key: Hashable
+    associatedtype Element
     
-    func remove(_ element: E)
+    func remove(byKey key: Key) -> Element?
 }
-
-
-
+    
 
 final class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
    
@@ -84,9 +72,12 @@ final class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
         return nil
     }
     
-    
-    func remove(_ element: Element, from provider: E) {
-         
+    @discardableResult
+    func remove(elementByKey: Key, from provider: E) -> Element? {
+        if let index = index(of: provider) {
+           return providers[index].remove(byKey: elementByKey)
+        }
+        return nil
     }
     
     

@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38B395D32BB583CE00E21F56"
-               BuildableName = "Cache.app"
-               BlueprintName = "Cache"
-               ReferencedContainer = "container:Cache.xcodeproj">
+               BuildableName = "StorageProvider.app"
+               BlueprintName = "StorageProvider"
+               ReferencedContainer = "container:StorageProvider.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:Cache.xctestplan"
+            reference = "container:StorageProvider.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -41,20 +41,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38B395E42BB583CF00E21F56"
-               BuildableName = "CacheTests.xctest"
-               BlueprintName = "CacheTests"
-               ReferencedContainer = "container:Cache.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38B395EE2BB583CF00E21F56"
-               BuildableName = "CacheUITests.xctest"
-               BlueprintName = "CacheUITests"
-               ReferencedContainer = "container:Cache.xcodeproj">
+               BuildableName = "StorageProviderTests.xctest"
+               BlueprintName = "StorageProviderTests"
+               ReferencedContainer = "container:StorageProvider.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -74,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38B395D32BB583CE00E21F56"
-            BuildableName = "Cache.app"
-            BlueprintName = "Cache"
-            ReferencedContainer = "container:Cache.xcodeproj">
+            BuildableName = "StorageProvider.app"
+            BlueprintName = "StorageProvider"
+            ReferencedContainer = "container:StorageProvider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -91,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38B395D32BB583CE00E21F56"
-            BuildableName = "Cache.app"
-            BlueprintName = "Cache"
-            ReferencedContainer = "container:Cache.xcodeproj">
+            BuildableName = "StorageProvider.app"
+            BlueprintName = "StorageProvider"
+            ReferencedContainer = "container:StorageProvider.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -4,7 +4,11 @@
       "id" : "D53E5421-F7B1-4115-8F79-737D487CEC93",
       "name" : "Test Scheme Action",
       "options" : {
-
+        "targetForVariableExpansion" : {
+          "containerPath" : "container:StorageProvider.xcodeproj",
+          "identifier" : "38B395D32BB583CE00E21F56",
+          "name" : "StorageProvider"
+        }
       }
     }
   ],
@@ -18,9 +22,9 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:Cache.xcodeproj",
+        "containerPath" : "container:StorageProvider.xcodeproj",
         "identifier" : "38B395E42BB583CF00E21F56",
-        "name" : "CacheTests"
+        "name" : "StorageProviderTests"
       }
     }
   ],
