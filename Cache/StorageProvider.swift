@@ -26,7 +26,7 @@ public protocol Provider {
     
     var id: UUID { get }
     func get(by key: Key) -> Element?
-    func add(_ element: Element, for key: Key)
+    func add(_ element: Element, forKey key: Key)
 }
 
 
@@ -53,6 +53,17 @@ final class ManagerProvider<E: Provider>: Provider {
     }
     
     
+    func add(_ element: Element, forKey key: Key) {
+         add(element, forKey: key, to: providers)
+    }
+    
+    
+    func add(to concreteProvider: E, _ element: Element, forKey key: Key) {
+        if let index = index(of: concreteProvider) {
+           add(element, forKey: key, to: [providers[index]])
+        }
+    }
+    
     
     
     func get(by key: Key) -> Element? {
@@ -63,27 +74,19 @@ final class ManagerProvider<E: Provider>: Provider {
     
     
     
-    
-    func add(_ element: Element, for key: Key) {
-        providers.forEach { $0.add(element, for: key) }
-    }
-    
-    
-    
-    
-    func add(to concrete: E, _ element: Element, for key: Key) {
-        
-       
-    }
-    
-    
-    
-    
-    
-    
     func set(active provider: E) {
         self.activeProvider = provider
     }
     
+    
+    
+    private func add(_ element: Element, forKey key: Key, to providers: [E]) {
+        providers.forEach { $0.add(element, forKey: key) }
+    }
+    
+    
+    private func index(of provider: E) -> Int? {
+        providers.firstIndex { $0.id == provider.id }
+    }
     
 }
