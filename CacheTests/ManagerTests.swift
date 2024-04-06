@@ -98,14 +98,11 @@ final class ManagerTests: XCTestCase {
     
     
     func test_removeProvider_shouldRemoveProviderFromArray() {
-        
         let sut = makeSUT(with: provider1, provider2)
+        
         XCTAssertEqual(sut.providersCount, 2)
-        
-        sut.remove(provider1)
-        
+        XCTAssertEqual(sut.remove(provider1)?.id, provider1.id)
         XCTAssertEqual(sut.providersCount, 1)
-
     }
     
     

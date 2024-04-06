@@ -76,9 +76,14 @@ final class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
         add(element, forKey: key, to: [concreteProvider])
     }
     
-    func remove(_ provider: E) {
-        providers.removeAll(where: { $0.id == provider.id })
+    @discardableResult
+    func remove(_ provider: E) -> E? {
+        if let index = index(of: provider) {
+            return providers.remove(at: index)
+        }
+        return nil
     }
+    
     
     func remove(_ element: Element, from provider: E) {
          
