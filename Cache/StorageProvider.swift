@@ -39,9 +39,7 @@ final class ManagerProvider<E: Provider>: Provider {
     var id: UUID
     
     private let providers: [E]
-    private var activeProvider: E?
-    
-    
+
     var providersCount: Int {
         providers.count
     }
@@ -57,6 +55,13 @@ final class ManagerProvider<E: Provider>: Provider {
          add(element, forKey: key, to: providers)
     }
     
+    func get(by key: Key) -> Element? {
+         get(by: key, from: providers)
+    }
+    
+    func get(by key: Key, fromConcrete provider: E) -> Element? {
+         get(by: key, from: [provider])
+    }
     
     func add(to concreteProvider: E, _ element: Element, forKey key: Key) {
         if let index = index(of: concreteProvider) {
@@ -64,29 +69,22 @@ final class ManagerProvider<E: Provider>: Provider {
         }
     }
     
-    
-    
-    func get(by key: Key) -> Element? {
-        
-        return nil
-    }
-    
-    
-    
-    
-    func set(active provider: E) {
-        self.activeProvider = provider
-    }
-    
-    
-    
     private func add(_ element: Element, forKey key: Key, to providers: [E]) {
         providers.forEach { $0.add(element, forKey: key) }
+    }
+
+    
+    private func get(by key: Key, from providers: [E]) -> Element? {
+        for provider in providers {
+            if let element = provider.get(by: key) {
+                return element
+            }
+        }
+        return nil
     }
     
     
     private func index(of provider: E) -> Int? {
         providers.firstIndex { $0.id == provider.id }
     }
-    
 }

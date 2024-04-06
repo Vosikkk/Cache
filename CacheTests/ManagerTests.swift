@@ -51,7 +51,7 @@ final class ManagerTests: XCTestCase {
     }
     
     
-    func test_add_elementToConcreteProvider_shouldSaveElementsOnlyOnConcrete() {
+    func test_add_elementToConcreteProvider_shouldSaveElementsOnlyOnConcreteProvider() {
        
         let sut = makeSUT(with: provider1, provider2)
         XCTAssertTrue(provider1.data.isEmpty)
@@ -71,10 +71,30 @@ final class ManagerTests: XCTestCase {
         
         XCTAssertEqual(provider2.data.count, 2)
         XCTAssertEqual(provider2.data[2], test2.values.first)
-        
     }
     
     
+    func test_getElementByKey_shouldReturnElementFromProvider() {
+        
+        let sut = makeSUT(with: provider1)
+        
+        sut.add(test.values.first!, forKey: 1)
+        sut.add(test.values.first!, forKey: 2)
+        
+        XCTAssertEqual(sut.get(by: 1), test.values.first!)
+        XCTAssertEqual(sut.get(by: 2), test.values.first!)
+    }
+    
+    func test_getElementByKey_fromConreteProvider_shouldReturnElementFromConcreteProvider() {
+        
+        let sut = makeSUT(with: provider1)
+        
+        sut.add(test.values.first!, forKey: 1)
+        sut.add(test.values.first!, forKey: 2)
+        
+        XCTAssertEqual(sut.get(by: 1), test.values.first!)
+        XCTAssertEqual(sut.get(by: 2), test.values.first!)
+    }
     
    
 
@@ -92,7 +112,6 @@ final class ManagerTests: XCTestCase {
              data[key]
         }
     
-      
         func add(_ element: [String], forKey key: Int) {
              data[key] = element
         }
