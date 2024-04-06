@@ -200,7 +200,7 @@ final class CacheTests: XCTestCase {
     // MARK: - Helpers
     
     
-    private class CacheMock: StorageProvider {
+    private class CacheMock: Provider {
         var id: UUID = UUID()
         
         private(set) var data: [Int: [String]] = [:]

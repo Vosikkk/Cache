@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Storage<E: StorageProvider> {
+final class Storage<E: Provider> {
     
     typealias Element = E.Element
     typealias Key = E.Key

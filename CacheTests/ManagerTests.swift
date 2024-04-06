@@ -87,13 +87,13 @@ final class ManagerTests: XCTestCase {
     
     func test_getElementByKey_fromConreteProvider_shouldReturnElementFromConcreteProvider() {
         
-        let sut = makeSUT(with: provider1)
+        let sut = makeSUT(with: provider1, provider2)
         
         sut.add(test.values.first!, forKey: 1)
-        sut.add(test.values.first!, forKey: 2)
+        sut.add(to: provider2, test.values.first!, forKey: 2)
         
         XCTAssertEqual(sut.get(by: 1), test.values.first!)
-        XCTAssertEqual(sut.get(by: 2), test.values.first!)
+        XCTAssertEqual(sut.get(by: 2, fromConcrete: provider1), nil)
     }
     
    
@@ -103,7 +103,7 @@ final class ManagerTests: XCTestCase {
     // MARK: - Helpers
     
     
-    private class ProviderMock: Provider {
+    private class ProviderMock: StorageProvider {
         var id: UUID = UUID()
         
         private(set) var data: [Int: [String]] = [:]

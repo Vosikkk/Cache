@@ -12,7 +12,7 @@
 		389A756B2BBB700E00147A89 /* RemoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A756A2BBB700E00147A89 /* RemoverTests.swift */; };
 		38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B395D72BB583CE00E21F56 /* AppDelegate.swift */; };
 		38B395DC2BB583CF00E21F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DB2BB583CF00E21F56 /* Assets.xcassets */; };
-		38B396042BB5856200E21F56 /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396032BB5856200E21F56 /* StorageProvider.swift */; };
+		38B396042BB5856200E21F56 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396032BB5856200E21F56 /* Provider.swift */; };
 		38B396062BB5862000E21F56 /* SorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B396052BB5862000E21F56 /* SorageTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		38B395E02BB583CF00E21F56 /* Cache.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cache.entitlements; sourceTree = "<group>"; };
 		38B395E52BB583CF00E21F56 /* CacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B396022BB5842A00E21F56 /* Cache.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cache.xctestplan; sourceTree = "<group>"; };
-		38B396032BB5856200E21F56 /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
+		38B396032BB5856200E21F56 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		38B396052BB5862000E21F56 /* SorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 				38B395D72BB583CE00E21F56 /* AppDelegate.swift */,
 				38B395DB2BB583CF00E21F56 /* Assets.xcassets */,
 				38B395E02BB583CF00E21F56 /* Cache.entitlements */,
-				38B396032BB5856200E21F56 /* StorageProvider.swift */,
+				38B396032BB5856200E21F56 /* Provider.swift */,
 				389A75682BBB6FA900147A89 /* Storage.swift */,
 			);
 			path = Cache;
@@ -199,7 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38B396042BB5856200E21F56 /* StorageProvider.swift in Sources */,
+				38B396042BB5856200E21F56 /* Provider.swift in Sources */,
 				38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */,
 				389A75692BBB6FA900147A89 /* Storage.swift in Sources */,
 			);

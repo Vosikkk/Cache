@@ -8,7 +8,7 @@
 import Foundation
 
 
-public protocol StorageProvider {
+public protocol Provider {
     
     associatedtype Element
     associatedtype Key: Hashable
@@ -19,7 +19,7 @@ public protocol StorageProvider {
 }
 
 
-public protocol Provider {
+public protocol StorageProvider {
     
     associatedtype Key: Hashable
     associatedtype Element
@@ -30,7 +30,10 @@ public protocol Provider {
 }
 
 
-final class ManagerProvider<E: Provider>: Provider {
+
+
+
+final class ManagerProvider<E: StorageProvider>: StorageProvider {
    
     typealias Key = E.Key
     typealias Element = E.Element
@@ -64,10 +67,11 @@ final class ManagerProvider<E: Provider>: Provider {
     }
     
     func add(to concreteProvider: E, _ element: Element, forKey key: Key) {
-        if let index = index(of: concreteProvider) {
-           add(element, forKey: key, to: [providers[index]])
-        }
+        add(element, forKey: key, to: [concreteProvider])
     }
+    
+    
+    // MARK: - Helpers
     
     private func add(_ element: Element, forKey key: Key, to providers: [E]) {
         providers.forEach { $0.add(element, forKey: key) }
