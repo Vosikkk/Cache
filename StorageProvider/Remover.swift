@@ -12,5 +12,5 @@ public protocol Remover {
     associatedtype Key: Hashable
     associatedtype Element
     
-    func remove(byKey key: Key) -> Element?
+    func remove(byKey key: Key) throws -> Element
 }

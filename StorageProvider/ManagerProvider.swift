@@ -8,7 +8,7 @@
 import Foundation
 
 
- class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
+class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
    
     typealias Key = E.Key
     typealias Element = E.Element
@@ -46,18 +46,18 @@ import Foundation
     
     @discardableResult
     func remove(_ provider: E) -> E? {
-        if let index = index(of: provider) {
+        if let index = providers.index(of: provider) {
             return providers.remove(at: index)
         }
         return nil
     }
     
     @discardableResult
-    func remove(elementByKey: Key, from provider: E) -> Element? {
-        if let index = index(of: provider) {
-           return providers[index].remove(byKey: elementByKey)
+    func remove(elementByKey: Key, from provider: E) throws -> Element {
+        guard let index = providers.index(of: provider) else {
+            throw StorageError.notFound
         }
-        return nil
+        return try providers[index].remove(byKey: elementByKey)
     }
     
     
@@ -76,21 +76,15 @@ import Foundation
         }
         return nil
     }
-    
-    
-    private func index(of provider: E) -> Int? {
-        providers.firstIndex { $0.id == provider.id }
-    }
 }
 
 
 
-class ConcurrentManagerProvider<E: StorageProvider> {
-    
+class ConcurrentManagerProvider<E: StorageProvider> where E: Remover {
     
     typealias Key = E.Key
     typealias Element = E.Element
-   
+    
     private let providersStorage: StorageForProviders<E>
     
     
@@ -98,28 +92,37 @@ class ConcurrentManagerProvider<E: StorageProvider> {
         self.providersStorage = .init(providers: providers)
     }
     
-     
+    
     func get(by key: Key) async throws -> Element {
         try await providersStorage.get(by: key)
     }
     
     func save(_ element: Element, forKey key: Key) async throws {
-         try await providersStorage.save(element, forKey: key)
+        try await providersStorage.save(element, forKey: key)
     }
     
+    func get(by key: Key, fromConcrete provider: E) async throws -> Element {
+        try await providersStorage.get(by: key, fromConcrete: provider)
+    }
+    
+    func remove(_ provider: E) async throws -> E {
+        try await providersStorage.remove(provider)
+    }
+    
+    func remove(byKey key: Key, from provider: E) async throws -> Element {
+        try await providersStorage.remove(byKey: key, from: provider)
+    }
     
 }
 
 
-private actor StorageForProviders<E: StorageProvider> {
-    
-    
-    private let providers: [E]
-    
+private actor StorageForProviders<E: StorageProvider> where E: Remover {
     
     typealias Key = E.Key
     typealias Element = E.Element
     
+    private var providers: [E]
+
     init(providers: [E]) {
         self.providers = providers
     }
@@ -129,8 +132,28 @@ private actor StorageForProviders<E: StorageProvider> {
     }
     
     func get(by key: Key) throws -> Element {
-         try get(by: key, from: providers)
+        try get(by: key, from: providers)
     }
+    
+    
+    func get(by key: Key, fromConcrete provider: E) throws -> Element {
+        try get(by: key, from: [provider])
+    }
+    
+    func remove(_ provider: E) throws -> E {
+        if let index = providers.index(of: provider) {
+            return providers.remove(at: index)
+        }
+        throw StorageError.notFound
+    }
+    
+    func remove(byKey key: Key, from provider: E) throws -> Element {
+        if let index = providers.index(of: provider) {
+            return try providers[index].remove(byKey: key)
+        }
+        throw StorageError.notFound
+    }
+    
     
     
     private func get(by key: Key, from providers: [E]) throws -> Element {
@@ -139,7 +162,16 @@ private actor StorageForProviders<E: StorageProvider> {
                 return element
             }
         }
-        throw
+        throw StorageError.notFound
     }
+}
+
+enum StorageError: Error {
+    case notFound
     
+}
+extension Array where Element: StorageProvider {
+    func index(of element: Element) -> Int? {
+        self.firstIndex(where: { $0.id == element.id } )
+    }
 }
