@@ -14,5 +14,5 @@ public protocol StorageProvider {
     
     var id: UUID { get }
     func get(by key: Key) -> Element?
-    func add(_ element: Element, forKey key: Key)
+    func save(_ element: Element, forKey key: Key)
 }

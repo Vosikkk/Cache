@@ -28,7 +28,7 @@ import Foundation
     }
     
     
-    func add(_ element: Element, forKey key: Key) {
+    func save(_ element: Element, forKey key: Key) {
          add(element, forKey: key, to: providers)
     }
     
@@ -64,7 +64,7 @@ import Foundation
     // MARK: - Helpers
     
     private func add(_ element: Element, forKey key: Key, to providers: [E]) {
-        providers.forEach { $0.add(element, forKey: key) }
+        providers.forEach { $0.save(element, forKey: key) }
     }
 
     
@@ -99,11 +99,11 @@ class ConcurrentManagerProvider<E: StorageProvider> {
     }
     
      
-    func get(by key: Key, from providers: [E]) async throws -> Element {
-         
+    func get(by key: Key) async throws -> Element {
+        try await providersStorage.get(by: key)
     }
     
-    func add(_ element: Element, forKey key: Key) async throws {
+    func save(_ element: Element, forKey key: Key) async throws {
          try await providersStorage.save(element, forKey: key)
     }
     
@@ -125,9 +125,21 @@ private actor StorageForProviders<E: StorageProvider> {
     }
     
     func save(_ data: Element, forKey key: Key) throws {
-        providers.forEach { $0.add(data, forKey: key) }
+        providers.forEach { $0.save(data, forKey: key) }
+    }
+    
+    func get(by key: Key) throws -> Element {
+         try get(by: key, from: providers)
     }
     
     
+    private func get(by key: Key, from providers: [E]) throws -> Element {
+        for provider in providers {
+            if let element = provider.get(by: key) {
+                return element
+            }
+        }
+        throw
+    }
     
 }

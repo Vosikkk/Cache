@@ -32,7 +32,7 @@ final class ManagerTests: XCTestCase {
         XCTAssertTrue(provider1.data.isEmpty)
         XCTAssertTrue(provider2.data.isEmpty)
         
-        sut.add(test.value, forKey: test.key)
+        sut.save(test.value, forKey: test.key)
        
         XCTAssertEqual(provider1.data.count, 1)
         XCTAssertEqual(provider1.data[test.key], test.value)
@@ -40,7 +40,7 @@ final class ManagerTests: XCTestCase {
         XCTAssertEqual(provider2.data[test.key], test.value)
         
         
-        sut.add(test2.value, forKey: test2.key)
+        sut.save(test2.value, forKey: test2.key)
         XCTAssertEqual(provider1.data.count, 2)
         XCTAssertEqual(provider1.data[test2.key], test2.value)
         
@@ -56,7 +56,7 @@ final class ManagerTests: XCTestCase {
         XCTAssertTrue(provider1.data.isEmpty)
         XCTAssertTrue(provider2.data.isEmpty)
         
-        sut.add(test.value, forKey: test.key)
+        sut.save(test.value, forKey: test.key)
        
         XCTAssertEqual(provider1.data.count, 1)
         XCTAssertEqual(provider1.data[test.key], test.value)
@@ -77,8 +77,8 @@ final class ManagerTests: XCTestCase {
         
         let sut = makeSUT(with: provider1)
         
-        sut.add(test.value, forKey: test.key)
-        sut.add(test.value, forKey: test2.key)
+        sut.save(test.value, forKey: test.key)
+        sut.save(test.value, forKey: test2.key)
         
         XCTAssertEqual(sut.get(by: test.key), test.value)
         XCTAssertEqual(sut.get(by: test2.key), test.value)
@@ -88,7 +88,7 @@ final class ManagerTests: XCTestCase {
         
         let sut = makeSUT(with: provider1, provider2)
         
-        sut.add(test.value, forKey: test.key)
+        sut.save(test.value, forKey: test.key)
         sut.add(to: provider2, test.value, forKey: test2.key)
         
         XCTAssertEqual(sut.get(by: test.key), test.value)
@@ -108,7 +108,7 @@ final class ManagerTests: XCTestCase {
         
         let sut = makeSUT(with: provider1)
         
-        sut.add(test.value, forKey: test.key)
+        sut.save(test.value, forKey: test.key)
         
         XCTAssertEqual(sut.remove(elementByKey: test.key, from: provider1), test.value)
         
@@ -131,7 +131,7 @@ final class ManagerTests: XCTestCase {
              data[key]
         }
     
-        func add(_ element: [String], forKey key: Int) {
+        func save(_ element: [String], forKey key: Int) {
              data[key] = element
         }
         
