@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
+ class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
    
     typealias Key = E.Key
     typealias Element = E.Element
@@ -81,4 +81,53 @@ final class ManagerProvider<E: StorageProvider & Remover>: StorageProvider {
     private func index(of provider: E) -> Int? {
         providers.firstIndex { $0.id == provider.id }
     }
+}
+
+
+
+class ConcurrentManagerProvider<E: StorageProvider> {
+    
+    
+    typealias Key = E.Key
+    typealias Element = E.Element
+   
+    private let providersStorage: StorageForProviders<E>
+    
+    
+    init(providers: E...) {
+        self.providersStorage = .init(providers: providers)
+    }
+    
+     
+    func get(by key: Key, from providers: [E]) async throws -> Element {
+         
+    }
+    
+    func add(_ element: Element, forKey key: Key) async throws {
+         try await providersStorage.save(element, forKey: key)
+    }
+    
+    
+}
+
+
+private actor StorageForProviders<E: StorageProvider> {
+    
+    
+    private let providers: [E]
+    
+    
+    typealias Key = E.Key
+    typealias Element = E.Element
+    
+    init(providers: [E]) {
+        self.providers = providers
+    }
+    
+    func save(_ data: Element, forKey key: Key) throws {
+        providers.forEach { $0.add(data, forKey: key) }
+    }
+    
+    
+    
 }
