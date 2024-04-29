@@ -10,6 +10,7 @@
 		381D476E2BC187BE00B8E334 /* ManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D476D2BC187BE00B8E334 /* ManagerTests.swift */; };
 		381D47702BC20BE200B8E334 /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D476F2BC20BE200B8E334 /* StorageProvider.swift */; };
 		381D47722BC20BFA00B8E334 /* Remover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D47712BC20BFA00B8E334 /* Remover.swift */; };
+		3879E8C52BDFC7B10034962C /* ConccurentManagerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3879E8C42BDFC7B10034962C /* ConccurentManagerProvider.swift */; };
 		389A756B2BBB700E00147A89 /* RemoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A756A2BBB700E00147A89 /* RemoverTests.swift */; };
 		38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B395D72BB583CE00E21F56 /* AppDelegate.swift */; };
 		38B395DC2BB583CF00E21F56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B395DB2BB583CF00E21F56 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		381D476D2BC187BE00B8E334 /* ManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTests.swift; sourceTree = "<group>"; };
 		381D476F2BC20BE200B8E334 /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
 		381D47712BC20BFA00B8E334 /* Remover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remover.swift; sourceTree = "<group>"; };
+		3879E8C42BDFC7B10034962C /* ConccurentManagerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConccurentManagerProvider.swift; sourceTree = "<group>"; };
 		389A756A2BBB700E00147A89 /* RemoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoverTests.swift; sourceTree = "<group>"; };
 		38B395D42BB583CE00E21F56 /* StorageProvider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorageProvider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B395D72BB583CE00E21F56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				38B395DB2BB583CF00E21F56 /* Assets.xcassets */,
 				38B395E02BB583CF00E21F56 /* StorageProvider.entitlements */,
 				38B396032BB5856200E21F56 /* ManagerProvider.swift */,
+				3879E8C42BDFC7B10034962C /* ConccurentManagerProvider.swift */,
 				381D476F2BC20BE200B8E334 /* StorageProvider.swift */,
 				381D47712BC20BFA00B8E334 /* Remover.swift */,
 			);
@@ -201,6 +204,7 @@
 			files = (
 				381D47722BC20BFA00B8E334 /* Remover.swift in Sources */,
 				38B396042BB5856200E21F56 /* ManagerProvider.swift in Sources */,
+				3879E8C52BDFC7B10034962C /* ConccurentManagerProvider.swift in Sources */,
 				381D47702BC20BE200B8E334 /* StorageProvider.swift in Sources */,
 				38B395D82BB583CE00E21F56 /* AppDelegate.swift in Sources */,
 			);
